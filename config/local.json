@@ -1,0 +1,45 @@
+/* Values from .env.dev
+CONTENT_SERVER_URL=http://127.0.0.1:3030
+SMTP_HOST=127.0.0.1
+SMTP_PORT=9999
+SMTP_SECURE=false
+LOG_LEVEL=info
+VERIFIER_VERSION=0
+CUSTOMS_SERVER_URL=none
+RESEND_BLACKOUT_PERIOD=0
+LOCKOUT_ENABLED=true
+SNS_TOPIC_ARN=disabled
+TRUSTED_JKUS=http://127.0.0.1:8080/.well-known/public-keys,http://127.0.0.1:10139/.well-known/public-keys
+STATSD_SAMPLE_RATE=1
+*/
+
+{
+  "publicUrl": "http://127.0.0.1:9000",
+  "listen": {
+    "host": "127.0.0.1",
+    "port": 9000
+  },
+  "contentServer": {
+    "url": "http://127.0.0.1:3030"
+  },
+  "smtp": {
+    "host": "localhost",
+    "port": 9999,
+    "secure": false,
+    "resendBlackoutPeriod": "0"
+  },
+  "log": {
+    "level": "info"
+  },
+  "verifierVersion": 0,
+  "snsTopicArn": "disabled",
+  "customsUrl": "none",
+  "lockoutEnabled": true,
+  "trustedJKUs": [
+    "http://127.0.0.1:8080/.well-known/public-keys",
+    "http://127.0.0.1:10139/.well-known/public-keys"
+  ],
+  "statsd": {
+    "sample_rate": 1
+  }
+}

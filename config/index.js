@@ -9,6 +9,7 @@ var path = require('path')
 var url = require('url')
 var convict = require('convict')
 var DEFAULT_SUPPORTED_LANGUAGES = require('./supportedLanguages')
+var DEV_CONFIG_PATH = path.join(__dirname, 'local.json');
 
 var conf = convict({
   env: {
@@ -344,11 +345,17 @@ var conf = convict({
   }
 })
 
-// handle configuration files.  you can specify a CSV list of configuration
+// Handle configuration files. You can specify a CSV list of configuration
 // files to process, which will be overlayed in order, in the CONFIG_FILES
-// environment variable.
+// environment variable. By default, the ./config/<env>.json file is loaded.
+// In the dev environment if the config file is missing use DEV_CONFIG_PATH
 
-var files = (process.env.CONFIG_FILES || '').split(',').filter(fs.existsSync)
+var envConfig = path.join(__dirname, conf.get('env') + '.json');
+if ( !fs.existsSync(envConfig) && conf.get('env') === 'dev' && fs.existsSync(DEV_CONFIG_PATH) ) {
+  envConfig = [ DEV_CONFIG_PATH ];
+}
+
+var files = (envConfig + ',' + process.env.CONFIG_FILES).split(',').filter(fs.existsSync)
 conf.loadFile(files)
 conf.validate({ strict: true })
 
