@@ -3,6 +3,10 @@
 /sandbox
 /config/public-key.json
 /config/secret-key.json
+/config/dev.json
+/config/test.json
+/config/stage.json
+/config/prod.json
 *.swp
 server.log*
 secret*
